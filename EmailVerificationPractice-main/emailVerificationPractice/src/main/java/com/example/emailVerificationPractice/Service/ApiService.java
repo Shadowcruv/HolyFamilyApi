@@ -14,5 +14,7 @@ public interface ApiService {
 
     void updateProfile(UserDetails userDetails, ApiUser apiUser);
 
+    void updatePassword(UserDetails userDetails, ApiUser apiUser);
+
     String confirmTokenn(String token);
 }

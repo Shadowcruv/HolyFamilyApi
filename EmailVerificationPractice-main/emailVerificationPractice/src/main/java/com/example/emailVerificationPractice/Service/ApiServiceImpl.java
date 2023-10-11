@@ -317,9 +317,24 @@ public class ApiServiceImpl implements ApiService, UserDetailsService {
 
     @Override
     public void updateProfile(UserDetails userDetails, ApiUser apiUser) {
-        ApiUser retrievedUser = apiUserRepository.findByuserName(userDetails.getUsername());
+        ApiUser retrievedUser = apiUserRepository.findOptionUserName(userDetails.getUsername()).
+                orElseThrow(()-> new IllegalStateException("No such User Exists"));
 
+        retrievedUser.setFirstName(apiUser.getFirstName());
+        retrievedUser.setLastName(apiUser.getLastName());
+        retrievedUser.setUserName(apiUser.getUserName());
 
+        apiUserRepository.save(retrievedUser);
+    }
+
+    @Override
+    public void updatePassword(UserDetails userDetails, ApiUser apiUser) {
+        ApiUser retrievedUser = apiUserRepository.findOptionUserName(userDetails.getUsername()).
+                orElseThrow(()-> new IllegalStateException("No such User Exists"));
+
+        retrievedUser.setPassword(passwordEncoder.encode(apiUser.getPassword()));
+
+        apiUserRepository.save(retrievedUser);
     }
 
     @Override

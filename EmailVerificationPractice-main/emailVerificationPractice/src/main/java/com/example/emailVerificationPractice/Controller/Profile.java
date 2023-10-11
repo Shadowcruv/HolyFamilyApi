@@ -23,6 +23,7 @@ public class Profile {
     //TODO: EDIT YOUR PROFILE
     //TODO: CHANGE YOUR PASSWORD
 
+    @GetMapping("/view-profile")
     public ApiUser getCurrentUser(@AuthenticationPrincipal UserDetails userDetails){
        return apiServiceImp.retrieveUser(userDetails.getUsername());
     }
@@ -31,8 +32,17 @@ public class Profile {
     public void updateProfile(@AuthenticationPrincipal UserDetails userDetails,@RequestBody ApiUser apiUser){
 
        apiServiceImp.updateProfile(userDetails,apiUser);
-
-        //studentService.save(originalStudent);
+       //studentService.save(originalStudent);
 
     }
+
+    @PutMapping("/update-password")
+    public void updatePassword(@AuthenticationPrincipal UserDetails userDetails,@RequestBody ApiUser apiUser){
+
+        apiServiceImp.updatePassword(userDetails,apiUser);
+
+
+    }
+
+
 }
