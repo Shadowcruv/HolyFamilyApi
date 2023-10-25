@@ -3,10 +3,15 @@ package com.example.emailVerificationPractice.Controller;
 
 import com.example.emailVerificationPractice.Entity.ApiUser;
 import com.example.emailVerificationPractice.Service.ApiServiceImpl;
+import com.example.emailVerificationPractice.Service.ImageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/adminpage")
@@ -14,9 +19,12 @@ import org.springframework.web.bind.annotation.*;
 public class Profile {
 
     private final ApiServiceImpl apiServiceImp;
+    private final ImageService imageService;
 
-    public Profile(ApiServiceImpl apiServiceImp) {
+    @Autowired
+    public Profile(ApiServiceImpl apiServiceImp, ImageService imageService) {
         this.apiServiceImp = apiServiceImp;
+        this.imageService = imageService;
     }
 
     //TODO: VIEW YOUR PROFILE
@@ -42,6 +50,19 @@ public class Profile {
         apiServiceImp.updatePassword(userDetails,apiUser);
 
 
+    }
+
+
+    //
+    //
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
+        try {
+            imageService.uploadImage(file);
+            return ResponseEntity.ok("Image uploaded successfully.");
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().body("Failed to upload image: " + e.getMessage());
+        }
     }
 
 

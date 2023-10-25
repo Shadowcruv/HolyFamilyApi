@@ -1,6 +1,7 @@
 package com.example.emailVerificationPractice.Entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.Collection;
 @Entity
 @Table
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiUser {
@@ -50,6 +52,7 @@ public class ApiUser {
     }
    )
     private Collection<ApiRole> authoritiess;
+
 
 
 //    public ApiUser( String userName, String password, Collection<ApiRole> authoritiess, Boolean enabled) {

@@ -33,7 +33,10 @@ public class ExtraConfig {
         xc.add(new ApiRole("role_Student"));
 
         apiUserRepository.save(
-                new ApiUser("samuel", passwordEncoder.encode("chidubem"),xc,true));
+//                new ApiUser("samuel", passwordEncoder.encode("chidubem"),xc,true));
+              ApiUser.builder().userName("userName").password(passwordEncoder.encode("chidubem")).
+                authoritiess(xc).enabled(true).build());
+
         return null;
     }
 

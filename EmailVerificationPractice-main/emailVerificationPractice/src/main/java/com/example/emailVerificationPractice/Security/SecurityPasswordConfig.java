@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -26,17 +27,20 @@ public class SecurityPasswordConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
+        customAuthenticationFilter.setFilterProcessesUrl("/holy-family/login");
+
         http
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/studentspage/spage","/resources/**",
-                        "/registration","/registration/confirm").permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-
-                .httpBasic();
+                        "/registration","/registration/confirm").permitAll();
+        http.authorizeRequests().anyRequest().authenticated();
+        http.addFilter(customAuthenticationFilter);
+        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
