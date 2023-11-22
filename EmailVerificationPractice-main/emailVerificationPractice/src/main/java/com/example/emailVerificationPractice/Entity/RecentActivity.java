@@ -27,6 +27,5 @@ public class RecentActivity {
     )
 
     private Long Id;
-    private Object object;
     private LocalDate date;
 }

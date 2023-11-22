@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/adminpage")
+@RequestMapping("/admin-page")
 @RestController
 public class AdminPage {
 
@@ -149,6 +149,8 @@ public class AdminPage {
 
         apiService.deleteUser(username);
     }
+
+    //TODO create implentation for sign out
 
 
 

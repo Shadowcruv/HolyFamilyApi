@@ -5,6 +5,7 @@ import com.example.emailVerificationPractice.Ctoken.ConfirmationTokenService;
 import com.example.emailVerificationPractice.EmailValidate.EmailValidator;
 import com.example.emailVerificationPractice.Entity.ApiRole;
 import com.example.emailVerificationPractice.Entity.ApiUser;
+import com.example.emailVerificationPractice.Entity.DatabaseExcluded.UserPassword;
 import com.example.emailVerificationPractice.Repository.ApiUserRepository;
 import com.example.emailVerificationPractice.email.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -251,6 +252,12 @@ public class ApiServiceImpl implements ApiService, UserDetailsService {
         return apiUsers;
     }
 
+    //TODO List<ApiUser> retrieveUsersAdminRoleS()
+//    public List<ApiUser> retrieveUsersAdminRoleS(){
+//        List<ApiUser> apiUsers = apiUserRepository.findUsersByAdmin();
+//        return apiUsers;
+//    }
+
 
     public ApiUser updateUser( Long id, ApiUser apiUser){
         ApiUser retrievedStudent = apiUserRepository.findById(id).
@@ -328,11 +335,11 @@ public class ApiServiceImpl implements ApiService, UserDetailsService {
     }
 
     @Override
-    public void updatePassword(UserDetails userDetails, ApiUser apiUser) {
+    public void updatePassword(UserDetails userDetails, UserPassword userPassword) {
         ApiUser retrievedUser = apiUserRepository.findOptionUserName(userDetails.getUsername()).
                 orElseThrow(()-> new IllegalStateException("No such User Exists"));
 
-        retrievedUser.setPassword(passwordEncoder.encode(apiUser.getPassword()));
+        retrievedUser.setPassword(passwordEncoder.encode(userPassword.getText()));
 
         apiUserRepository.save(retrievedUser);
     }

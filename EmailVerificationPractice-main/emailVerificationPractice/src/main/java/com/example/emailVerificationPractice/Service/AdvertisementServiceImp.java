@@ -2,9 +2,10 @@ package com.example.emailVerificationPractice.Service;
 
 import com.example.emailVerificationPractice.Entity.Advertisement;
 import com.example.emailVerificationPractice.Repository.AdvertisementRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class AdvertisementServiceImp implements AdvertisementService{
 
     private final AdvertisementRepository advertisementRepository;

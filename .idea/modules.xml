@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/EmailVerificationPractice-main.iml" filepath="$PROJECT_DIR$/.idea/EmailVerificationPractice-main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/EmailVerificationPractice-main/emailVerificationPractice/emailVerificationPractice.iml" filepath="$PROJECT_DIR$/EmailVerificationPractice-main/emailVerificationPractice/emailVerificationPractice.iml" />
     </modules>
   </component>
 </project>

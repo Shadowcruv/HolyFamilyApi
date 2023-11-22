@@ -35,7 +35,7 @@ public class ApiUser {
     //TODO: Update1 : add more properties of the ApiUser
 
     private String urlPic;
-    private String post;
+    private String roomNo;
     private String firstName;
     private String lastName;
     private String school;
@@ -75,17 +75,10 @@ public class ApiUser {
 //    }
 
 
-
-
-
-    /*
-    Things to do
-    Encode the url
-    check for email validity
-    understand how that controller works for a user logging in so that he wouldn't bypass into another user's account
-    work on update user details
-    if conditions
-
-
-     */
+    //TODO Encode the Url,
+    // check for email validity
+    //  understand how that controller works for a user logging in so that he wouldn't bypass into another user's account
+    //  work on update user details
+    //  if conditions
+    // Attach a room entity to a user;
 }

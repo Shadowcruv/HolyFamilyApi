@@ -2,9 +2,10 @@ package com.example.emailVerificationPractice.Service;
 
 import com.example.emailVerificationPractice.Entity.Event;
 import com.example.emailVerificationPractice.Repository.EventRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class EventsServiceImpl implements EventService{
 
     private final EventRepository eventRepository;
