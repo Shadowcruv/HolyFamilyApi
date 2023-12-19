@@ -5,19 +5,23 @@ import com.example.emailVerificationPractice.Entity.ApiUser;
 import com.example.emailVerificationPractice.Entity.DatabaseExcluded.UserPassword;
 import com.example.emailVerificationPractice.Service.ApiServiceImpl;
 //import com.example.emailVerificationPractice.Service.ImageService;
+import com.example.emailVerificationPractice.Service.ImageUploadingService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:5501")
 @RequestMapping("/profile")
 @RestController
 public class ProfileWebPage {
 
     private final ApiServiceImpl apiServiceImp;
+    private final ImageUploadingService imageUploadingService;
 
-    public ProfileWebPage(ApiServiceImpl apiServiceImp) {
+    public ProfileWebPage(ApiServiceImpl apiServiceImp, ImageUploadingService imageUploadingService) {
         this.apiServiceImp = apiServiceImp;
+        this.imageUploadingService = imageUploadingService;
     }
 //    private final ImageService imageService;
 
@@ -33,10 +37,15 @@ public class ProfileWebPage {
     }
 
     @PutMapping("/update-profile")
-    public void updateProfile(@AuthenticationPrincipal UserDetails userDetails,@RequestBody ApiUser apiUser){
+    public void updateProfile(@AuthenticationPrincipal UserDetails userDetails,
+                              @RequestBody ApiUser apiUser,
+                              @RequestParam("file") MultipartFile multipartFile){
 
-       apiServiceImp.updateProfile(userDetails,apiUser);
-       //studentService.save(originalStudent);
+
+        String imageUrl = imageUploadingService.upload(multipartFile);
+        apiUser.setUrlPic(imageUrl);
+        apiServiceImp.updateProfile(userDetails,apiUser);
+        //studentService.save(originalStudent);
 
     }
 

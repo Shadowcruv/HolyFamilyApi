@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5501")
 @RequestMapping("/admin-general-page")
 @RestController
 public class AdminWebPageGeneral {
